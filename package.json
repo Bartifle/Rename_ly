@@ -1,23 +1,26 @@
 {
-  "name": "rename_ly",
-  "version": "1.0.0",
-  "description": "Discord Bot used to rename guild members for a specific event, randomly from a txt input.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bartifle/Rename_ly.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Bartifle/Rename_ly/issues"
-  },
-  "homepage": "https://github.com/Bartifle/Rename_ly#readme",
-  "dependencies": {
-    "discord.js": "^14.14.1",
-    "dotenv": "^16.3.1"
-  }
+    "name": "rename_ly",
+    "version": "1.0.0",
+    "description": "Discord Bot used to rename guild members for a specific event, randomly from a txt input.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Bartifle/Rename_ly.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Bartifle/Rename_ly/issues"
+    },
+    "homepage": "https://github.com/Bartifle/Rename_ly#readme",
+    "dependencies": {
+        "discord.js": "^14.14.1",
+        "dotenv": "^16.3.1",
+        "node-fetch": "^3.3.2",
+        "sequelize": "^6.35.0",
+        "sqlite3": "^5.1.6"
+    }
 }
