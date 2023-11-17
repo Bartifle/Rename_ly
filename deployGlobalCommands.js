@@ -40,9 +40,12 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
             `Started refreshing ${commands.length} application (/) commands.`
         );
 
-        await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
-            body: commands,
-        });
+        const data = await rest.put(
+            Routes.applicationCommands(process.env.CLIENT_ID),
+            {
+                body: commands,
+            }
+        );
 
         console.log(
             `Successfully reloaded ${data.length} application (/) commands.`

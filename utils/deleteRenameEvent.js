@@ -1,14 +1,14 @@
 const NameList = require("../model/nameList");
 
-const deleteRenameEvent = async (interaction) => {
+const deleteRenameEvent = async (guildId, eventName) => {
     try {
         await NameList.destroy({
             where: {
-                guild_id: [interaction.guildId],
-                event_type: [interaction.options.getString("event_name")],
+                guild_id: [guildId],
+                event_name: [eventName],
             },
         });
-        return interaction.options.getString("event_name");
+        return eventName;
     } catch (error) {
         console.log(error);
     }

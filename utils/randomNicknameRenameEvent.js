@@ -1,11 +1,12 @@
 const NameList = require("../model/nameList");
 
-const randomNicknameRenameEvent = async (interaction) => {
+const randomNicknameRenameEvent = async (guildId, eventName) => {
     let nameArray = [];
 
     const nameList = await NameList.findAll({
         where: {
-            guild_id: [interaction.guildId],
+            guild_id: [guildId],
+            event_name: [eventName],
         },
     });
     nameList.map((name) => {

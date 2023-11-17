@@ -1,4 +1,11 @@
-const { Events } = require("discord.js");
+const {
+    Events,
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+} = require("discord.js");
+
+const participateRenameEventHandler = require("../utils/participateRenameEventHandler");
 
 module.exports = {
     name: Events.InteractionCreate,
@@ -39,8 +46,11 @@ module.exports = {
                 } catch (error) {
                     console.error(error);
                 }
-            } else if (interaction.isButton()) {
-                //TODO respond to the button
+            } else if (
+                interaction.isButton() &&
+                interaction.customId === "participate_rename_event"
+            ) {
+                await participateRenameEventHandler(interaction);
             } else if (interaction.isStringSelectMenu()) {
                 //TODO respond to the select menu
             }

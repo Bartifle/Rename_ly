@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("discord.js");
 
-const getRenameEvent = require("../../utils/getRenameEvent");
+const getRenameEventByGuildId = require("../../utils/getRenameEventByGuildId");
 const deleteRenameEvent = require("../../utils/deleteRenameEvent");
 
 module.exports = {
@@ -17,7 +17,9 @@ module.exports = {
 
     async autocomplete(interaction) {
         try {
-            const eventArray = await getRenameEvent(interaction);
+            const eventArray = await getRenameEventByGuildId(
+                interaction.guildId
+            );
             await interaction.respond(
                 eventArray.map((choice) => ({ name: choice, value: choice }))
             );
@@ -28,9 +30,13 @@ module.exports = {
 
     async execute(interaction) {
         try {
-            const eventName = await deleteRenameEvent(interaction);
+            const eventName = interaction.options.getString("event_name");
+            const responseName = await deleteRenameEvent(
+                interaction.guildId,
+                eventName
+            );
             await interaction.reply(
-                `You successfully stoped ${eventName} event!`
+                `You successfully stoped ${responseName} event!`
             );
         } catch (error) {
             console.log(error);

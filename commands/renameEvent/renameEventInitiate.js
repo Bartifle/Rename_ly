@@ -1,9 +1,16 @@
-const { SlashCommandBuilder } = require("discord.js");
+const {
+    SlashCommandBuilder,
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+} = require("discord.js");
 
 const fetch = (...args) =>
     import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
 const jsonToDatabase = require("../../utils/jsonToDatabase");
+
+// TODO add model that stores message id in and eventList
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,6 +31,13 @@ module.exports = {
 
     async execute(interaction) {
         try {
+            const row = new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId("participate_rename_event")
+                    .setLabel("Participate")
+                    .setStyle(ButtonStyle.Secondary)
+            );
+
             const event = interaction.options.getString("event_name");
             const file = interaction.options.getAttachment("file");
             const data = await fetch(file.url);
@@ -31,10 +45,17 @@ module.exports = {
             const jsonData = (await txt).split("\r\n");
             const target = interaction.user;
 
-            await jsonToDatabase(jsonData, interaction.guildId, event);
+            const replyMessage = await interaction.reply({
+                content: `${target} You initiated an event campain called ${event} `,
+                components: [row],
+                fetchReply: true,
+            });
 
-            await interaction.reply(
-                `${target} You initiated an event campain called ${event}`
+            await jsonToDatabase(
+                jsonData,
+                interaction.guildId,
+                replyMessage.id,
+                event
             );
         } catch (error) {
             console.log(error);

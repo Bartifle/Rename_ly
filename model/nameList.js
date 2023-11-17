@@ -6,7 +6,8 @@ const NameList = sequelize.define(
     {
         name: Sequelize.STRING,
         guild_id: Sequelize.STRING,
-        event_type: Sequelize.STRING,
+        message_id: Sequelize.STRING,
+        event_name: Sequelize.STRING,
     },
     { timestamps: false }
 );
